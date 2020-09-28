@@ -1,7 +1,6 @@
-#include "ir.h"
 #include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include "reg52.h"
+#include "ir.h"
 
 void TimeInit() {
 	TMOD = 0x01;		// set mode T1
@@ -10,32 +9,19 @@ void TimeInit() {
 	TR0  = 1;			// launch timer
 }
 
-int Negedge(sbit signal) {
-	if(!flag) {
-		if(!signal) {
-			flag = 1;
-		}
-	}
-	else {
-		if(signal){
-			flag = 0;
-			return 1;
-		}
-	}
+int IsNegedge(bit cur, bit prev) {
+	int res = 0;
+	if(prev && !cur) res = 1;
+	return res;
 }
 
-int Negedge(sbit signal, sbit probe) {
-	if(!flag) {
-		if(!signal) {
-			flag = 1;
-			probe = ~(probe);
-		}
-	}
-	else {
-		if(signal){
-			flag = 0;
-			probe = ~(probe);
-			return 1;
-		}
-	}
+int IsPosedge(bit cur, bit prev) {
+	int res = 0;
+	if(!prev && cur) res = 1;
+	return res;
 }
+
+int FlowOverclockAlert(int flow) {
+	return 0;
+}
+
