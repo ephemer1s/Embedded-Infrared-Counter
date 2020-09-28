@@ -1,5 +1,0 @@
-".\Objects\STARTUP.obj",
-".\Objects\main.obj",
-".\Objects\ray.obj" 
-TO ".\Objects\infrared ray" 
-PRINT(".\Listings\infrared ray.m51") RAMSIZE(256) 
