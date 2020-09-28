@@ -1,0 +1,10 @@
+D:\Program Data\Keil\Infrared-photogate-design\HostApp\bin\Debug\HostApp.exe.config
+D:\Program Data\Keil\Infrared-photogate-design\HostApp\bin\Debug\HostApp.exe
+D:\Program Data\Keil\Infrared-photogate-design\HostApp\bin\Debug\HostApp.pdb
+D:\Program Data\Keil\Infrared-photogate-design\HostApp\obj\Debug\HostApp.csprojAssemblyReference.cache
+D:\Program Data\Keil\Infrared-photogate-design\HostApp\obj\Debug\HostApp.Form1.resources
+D:\Program Data\Keil\Infrared-photogate-design\HostApp\obj\Debug\HostApp.Properties.Resources.resources
+D:\Program Data\Keil\Infrared-photogate-design\HostApp\obj\Debug\HostApp.csproj.GenerateResource.cache
+D:\Program Data\Keil\Infrared-photogate-design\HostApp\obj\Debug\HostApp.csproj.CoreCompileInputs.cache
+D:\Program Data\Keil\Infrared-photogate-design\HostApp\obj\Debug\HostApp.exe
+D:\Program Data\Keil\Infrared-photogate-design\HostApp\obj\Debug\HostApp.pdb
