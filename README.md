@@ -1,23 +1,35 @@
 # Embedded Infrared Counter based on STC89C52 MicroProcessor
 
-* `HostApp` - C# Host GUI source code
+## File Index
 
-* `Objects` - Compiled embedded codes
+* `Blueprint` - Circuit design of this embedded system.
 
-    * `embedded.hex` - Compiled hex file
+* `HostApp` - C# Host GUI source code.
 
-* `SerialCom-py` - python serialport communication codes
+    * `Form1.cs` - GUI Implementations.
 
-* `embedded.uvproj` - Keil uVision5 project
+    * `ComVars.cs` - ComVars class, stores some of static variables.
 
-* `STARTUP.A51` - AT89C51RC MPU Init Program
+* `Objects` - Compiled embedded codes.
 
-* `ir.h` - Define functions and variables for Infrared sensors
+    * `embedded.hex` - Compiled hex file.
 
-* `ir.c` - Implement functions in `ir.h`
+* `SerialCom-py` - python serialport communication codes.
 
-* `lcd.h` - Define functions and variables for LCD screen display
+* `embedded.uvproj` - Keil uVision5 project.
 
-* `lcd.c` - Implement functions in `lcd.h`
+* `STARTUP.A51` - AT89C51RC MPU Init Program.
+
+* `ir.h` - Define functions and variables for Infrared sensors.
+
+* `ir.c` - Implement functions in `ir.h`.
+
+* `lcd.h` - Define functions and variables for LCD screen display.
+
+* `lcd.c` - Implement functions in `lcd.h`.
 
 * `main.c` - Main entrance of embedded codes.
+
+* `x5045.h` - Define functions and variables for EEPROM save.
+
+* `x5045.c` - Implement functions in `lcd.h`.
