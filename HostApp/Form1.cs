@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports;
+using System.Net.Security;
 
 namespace HostApp
 {
@@ -31,7 +32,7 @@ namespace HostApp
         public void serialPort_init()
         {
             serialPort1.BaudRate = 9600;
-            serialPort1.PortName = "COM1";
+            serialPort1.PortName = "COM3";
             serialPort1.DataBits = 8;
             serialPort1.Parity = Parity.None;
             serialPort1.StopBits = StopBits.One;
@@ -71,6 +72,7 @@ namespace HostApp
         {
             timer1.Interval = 1000;
             timer1.Start();
+            ComVars.recv_buffer = "";
 
             serialPort_init();
             getSerialAttr();
@@ -108,6 +110,16 @@ namespace HostApp
             MessageBox.Show("采集设置应用成功");
         }
 
+        private void button_serial_reset_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("是否重置串口设置?", "", MessageBoxButtons.YesNo);
+            if (dr == DialogResult.Yes)
+            {
+                serialPort_init();
+                MessageBox.Show("重置成功");
+            }
+        }
+
         private void button_serial_apply_Click(object sender, EventArgs e)
         {
             //button_serial_apply.Enabled = false;
@@ -133,21 +145,37 @@ namespace HostApp
             {
                 MessageBox.Show("串口设置应用成功");
             }
+
+            linkCom();
         }
 
-        private void button_serial_reset_Click(object sender, EventArgs e)
+        private void linkCom()
         {
-            DialogResult dr = MessageBox.Show("是否重置串口设置?", "", MessageBoxButtons.YesNo);
-            if(dr == DialogResult.Yes)
+            try
             {
-                serialPort_init();
-                MessageBox.Show("重置成功");
+                serialPort1.Open();
+                MessageBox.Show("串口连接成功");
             }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.ToString());
+                this.Close();
+            }
+        }
+
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+
         }
 
         private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
-
+            int n = serialPort1.BytesToRead;
+            byte[] buf = new byte[n];
+            serialPort1.Read(buf, 0, n);
+            string recv = "";
+            recv += Encoding.ASCII.GetString(buf);
+            MessageBox.Show(recv);
         }
 
         private void timer2_Tick(object sender, EventArgs e)
@@ -176,5 +204,7 @@ namespace HostApp
             toolStripStatusLabel2.Text = ComVars.used_time.ToString() + "s";
             toolStripStatusLabel3.Visible = false;
         }
+
+
     }
 }
