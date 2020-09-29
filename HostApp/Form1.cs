@@ -72,7 +72,7 @@ namespace HostApp
         {
             timer1.Interval = 1000;
             timer1.Start();
-            ComVars.recv_buffer = "";
+            ComVars.time_stamp = DateTime.Now.ToString();
 
             serialPort_init();
             getSerialAttr();
@@ -88,16 +88,31 @@ namespace HostApp
         {
             /* display current time */
             toolStripStatusTime.Text = DateTime.Now.ToString();
-
+            
             /* write file */
-            //string[] logs = new string[] { "Zara Ali", "Nuha Ali" };
-            //using (StreamWriter sw = new StreamWriter("./logs/logs.txt"))
-            //{
-            //    foreach (string s in logs)
-            //    {
-            //        sw.WriteLine(s);
-            //    }
-            //}
+            string s = "";
+            string f = "./logs/logs" + ComVars.time_stamp + ".txt";
+            if (ComVars.num_enter != int.Parse(labelQ.Text))
+            {
+                s = "Total Enter: " + ComVars.num_enter.ToString() + " at " + DateTime.Now.ToString();
+                using (StreamWriter sw = new StreamWriter(f, true))
+                {
+                    sw.WriteLine(s);
+                }
+            }
+            if(ComVars.num_exit != int.Parse(labelE.Text))
+            {
+                s = "Total Exit: " + ComVars.num_enter.ToString() + " at " + DateTime.Now.ToString();
+                using (StreamWriter sw = new StreamWriter(f, true))
+                {
+                    sw.WriteLine(s);
+                }
+            }
+
+
+            /* update UI according to data */
+            labelQ.Text = ComVars.num_enter.ToString();
+            labelE.Text = ComVars.num_exit.ToString();
         }
 
         private void button_collect_apply_Click(object sender, EventArgs e)
@@ -123,7 +138,10 @@ namespace HostApp
         private void button_serial_apply_Click(object sender, EventArgs e)
         {
             //button_serial_apply.Enabled = false;
-
+            if (serialPort1.IsOpen)
+            {
+                serialPort1.Close();
+            }
             /* Apply Changes */
             bool err = false;
             try
@@ -176,10 +194,24 @@ namespace HostApp
             string recv = "";
             recv += Encoding.ASCII.GetString(buf);
             MessageBox.Show(recv);
+            if(recv == "0")
+            {
+                ComVars.num_enter++;
+            }
+            if(recv == "1")
+            {
+                ComVars.num_exit++;
+            }
         }
 
         private void timer2_Tick(object sender, EventArgs e)
         {
+            //if(ComVars.num_enter >= ComVars.alert_valve)
+            //{
+            //    pictureBox1.BackColor = Color.MistyRose;
+            //    groupBox1.BackColor = Color.MistyRose;
+            //}
+
             if (ComVars.used_time == ComVars.collect_time)
             {
                 toolStripStatusLabel3.Visible = true;
@@ -199,10 +231,12 @@ namespace HostApp
         private void debugToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ComVars.used_time = 0;
+            collectData_init();
+
             timer2.Interval = 1000;
-            timer2.Start();
             toolStripStatusLabel2.Text = ComVars.used_time.ToString() + "s";
             toolStripStatusLabel3.Visible = false;
+            timer2.Start();
         }
 
 

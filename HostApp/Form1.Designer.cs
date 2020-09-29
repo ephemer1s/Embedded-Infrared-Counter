@@ -111,18 +111,18 @@
             this.labelA.AutoSize = true;
             this.labelA.Location = new System.Drawing.Point(62, 52);
             this.labelA.Name = "labelA";
-            this.labelA.Size = new System.Drawing.Size(64, 24);
+            this.labelA.Size = new System.Drawing.Size(78, 24);
             this.labelA.TabIndex = 3;
-            this.labelA.Text = "labelA";
+            this.labelA.Text = "暂无数据";
             // 
             // labelQ
             // 
             this.labelQ.AutoSize = true;
             this.labelQ.Location = new System.Drawing.Point(62, 26);
             this.labelQ.Name = "labelQ";
-            this.labelQ.Size = new System.Drawing.Size(65, 24);
+            this.labelQ.Size = new System.Drawing.Size(20, 24);
             this.labelQ.TabIndex = 2;
-            this.labelQ.Text = "labelQ";
+            this.labelQ.Text = "0";
             // 
             // label8
             // 
@@ -236,11 +236,11 @@
             // button_collect_apply
             // 
             this.button_collect_apply.Font = new System.Drawing.Font("微软雅黑", 10.28571F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button_collect_apply.Location = new System.Drawing.Point(386, 18);
+            this.button_collect_apply.Location = new System.Drawing.Point(389, 19);
             this.button_collect_apply.Name = "button_collect_apply";
-            this.button_collect_apply.Size = new System.Drawing.Size(108, 33);
+            this.button_collect_apply.Size = new System.Drawing.Size(106, 33);
             this.button_collect_apply.TabIndex = 17;
-            this.button_collect_apply.Text = "应用";
+            this.button_collect_apply.Text = "发送";
             this.button_collect_apply.UseVisualStyleBackColor = true;
             this.button_collect_apply.Click += new System.EventHandler(this.button_collect_apply_Click);
             // 
@@ -248,7 +248,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("微软雅黑", 10.28571F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label11.Location = new System.Drawing.Point(196, 23);
+            this.label11.Location = new System.Drawing.Point(196, 24);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(78, 23);
             this.label11.TabIndex = 3;
@@ -258,7 +258,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("微软雅黑", 10.28571F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label10.Location = new System.Drawing.Point(6, 23);
+            this.label10.Location = new System.Drawing.Point(6, 24);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(78, 23);
             this.label10.TabIndex = 2;
@@ -312,7 +312,7 @@
             // button_serial_reset
             // 
             this.button_serial_reset.Font = new System.Drawing.Font("微软雅黑", 10.28571F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button_serial_reset.Location = new System.Drawing.Point(389, 101);
+            this.button_serial_reset.Location = new System.Drawing.Point(389, 103);
             this.button_serial_reset.Name = "button_serial_reset";
             this.button_serial_reset.Size = new System.Drawing.Size(106, 33);
             this.button_serial_reset.TabIndex = 11;
@@ -323,7 +323,7 @@
             // button_serial_apply
             // 
             this.button_serial_apply.Font = new System.Drawing.Font("微软雅黑", 10.28571F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button_serial_apply.Location = new System.Drawing.Point(277, 102);
+            this.button_serial_apply.Location = new System.Drawing.Point(273, 103);
             this.button_serial_apply.Name = "button_serial_apply";
             this.button_serial_apply.Size = new System.Drawing.Size(106, 33);
             this.button_serial_apply.TabIndex = 10;
@@ -380,18 +380,18 @@
             this.labelD.AutoSize = true;
             this.labelD.Location = new System.Drawing.Point(62, 52);
             this.labelD.Name = "labelD";
-            this.labelD.Size = new System.Drawing.Size(64, 24);
+            this.labelD.Size = new System.Drawing.Size(78, 24);
             this.labelD.TabIndex = 5;
-            this.labelD.Text = "labelD";
+            this.labelD.Text = "暂无数据";
             // 
             // labelE
             // 
             this.labelE.AutoSize = true;
             this.labelE.Location = new System.Drawing.Point(62, 26);
             this.labelE.Name = "labelE";
-            this.labelE.Size = new System.Drawing.Size(61, 24);
+            this.labelE.Size = new System.Drawing.Size(20, 24);
             this.labelE.TabIndex = 4;
-            this.labelE.Text = "labelE";
+            this.labelE.Text = "0";
             // 
             // label3
             // 
@@ -526,7 +526,7 @@
             this.toolStripButton2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(520, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(520, 31);
             this.toolStrip1.TabIndex = 11;
             this.toolStrip1.Text = "toolStrip1";
             // 

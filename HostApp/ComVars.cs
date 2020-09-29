@@ -16,6 +16,6 @@ namespace HostApp
         public static int num_exit;
         public static int flow_enter;
         public static int flow_exit;
-        public static string recv_buffer;
+        public static string time_stamp;
     }
 }
