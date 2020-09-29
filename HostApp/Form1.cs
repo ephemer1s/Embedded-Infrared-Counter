@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO.Ports;
+using System.Net.Security;
 
 namespace HostApp
 {
@@ -18,76 +20,225 @@ namespace HostApp
             InitializeComponent();
         }
 
-        private void groupbox_com_init()
+        private void getSerialAttr()
         {
-            textBox2.Text = "9600";
-            comboBox1.SelectedIndex = 0;
-            comboBox2.SelectedIndex = 2;
-            comboBox3.SelectedIndex = 0;
-            comboBox4.SelectedIndex = 0;
+            textBox2.Text = serialPort1.BaudRate.ToString();
+            comboBox1.SelectedItem = serialPort1.PortName.ToString();
+            comboBox2.SelectedItem = serialPort1.DataBits.ToString();
+            comboBox3.SelectedIndex = (int)serialPort1.Parity;
+            comboBox4.SelectedIndex = (int)serialPort1.StopBits;
         }
 
-        private void groupbox_collect_init()
+        public void serialPort_init()
         {
-            textBox1.Text = "60";
-            textBox3.Text = "10";
+            serialPort1.BaudRate = 9600;
+            serialPort1.PortName = "COM3";
+            serialPort1.DataBits = 8;
+            serialPort1.Parity = Parity.None;
+            serialPort1.StopBits = StopBits.One;
         }
 
-        public void com_init()
+        private void getCollectAttr()
         {
-            ComVars.baudrate = 9600;
-            ComVars.com = "COM1";
-            ComVars.data_bit = 8;
-            ComVars.parity_bit = 1;
-            ComVars.end_bit = 1;
+            textBox1.Text = ComVars.collect_time.ToString();
+            textBox3.Text = ComVars.alert_valve.ToString();
         }
 
-        public void collect_init()
+        public void collectAttr_init()
         {
             ComVars.collect_time = 60;
             ComVars.alert_valve = 10;
-            ComVars.num_entered = 0;
-            ComVars.num_exited = 0;
+            ComVars.num_enter = 0;
+            ComVars.num_exit = 0;
+        }
+
+        public void collectData_init()
+        {
+            ComVars.num_enter = 0;
+            ComVars.num_exit = 0;
+            ComVars.flow_enter = 0;
+            ComVars.flow_exit = 0;
+        }
+
+        public void getCollectData()
+        {
+            labelQ.Text = ComVars.num_enter.ToString();
+            labelE.Text = ComVars.num_exit.ToString();
+            labelA.Text = ComVars.flow_enter.ToString();
+            labelD.Text = ComVars.flow_exit.ToString();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             timer1.Interval = 1000;
             timer1.Start();
-            groupbox_com_init();
-            groupbox_collect_init();
+            ComVars.time_stamp = DateTime.Now.ToString();
+
+            serialPort_init();
+            getSerialAttr();
+
+            collectAttr_init();
+            getCollectAttr();
+
+            collectData_init();
+            getCollectData();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             /* display current time */
             toolStripStatusTime.Text = DateTime.Now.ToString();
-
+            
             /* write file */
-            //string[] logs = new string[] { "Zara Ali", "Nuha Ali" };
-            //using (StreamWriter sw = new StreamWriter("./logs/logs.txt"))
-            //{
-            //    foreach (string s in logs)
-            //    {
-            //        sw.WriteLine(s);
-            //    }
-            //}
+            string s = "";
+            string f = "./logs/logs" + ComVars.time_stamp + ".txt";
+            if (ComVars.num_enter != int.Parse(labelQ.Text))
+            {
+                s = "Total Enter: " + ComVars.num_enter.ToString() + " at " + DateTime.Now.ToString();
+                using (StreamWriter sw = new StreamWriter(f, true))
+                {
+                    sw.WriteLine(s);
+                }
+            }
+            if(ComVars.num_exit != int.Parse(labelE.Text))
+            {
+                s = "Total Exit: " + ComVars.num_enter.ToString() + " at " + DateTime.Now.ToString();
+                using (StreamWriter sw = new StreamWriter(f, true))
+                {
+                    sw.WriteLine(s);
+                }
+            }
+
+
+            /* update UI according to data */
+            labelQ.Text = ComVars.num_enter.ToString();
+            labelE.Text = ComVars.num_exit.ToString();
         }
 
         private void button_collect_apply_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button_serial_apply_Click(object sender, EventArgs e)
-        {
-
+            //button_collect_apply.Enabled = false;
+            ComVars.collect_time = int.Parse(textBox1.Text);
+            ComVars.alert_valve = int.Parse(textBox2.Text);
+            ComVars.used_time = 0;
+            collectData_init();
+            MessageBox.Show("采集设置应用成功");
         }
 
         private void button_serial_reset_Click(object sender, EventArgs e)
         {
-            com_init();
-            groupbox_com_init();
+            DialogResult dr = MessageBox.Show("是否重置串口设置?", "", MessageBoxButtons.YesNo);
+            if (dr == DialogResult.Yes)
+            {
+                serialPort_init();
+                MessageBox.Show("重置成功");
+            }
         }
+
+        private void button_serial_apply_Click(object sender, EventArgs e)
+        {
+            //button_serial_apply.Enabled = false;
+            if (serialPort1.IsOpen)
+            {
+                serialPort1.Close();
+            }
+            /* Apply Changes */
+            bool err = false;
+            try
+            {
+                serialPort1.BaudRate = int.Parse(textBox2.Text);
+                serialPort1.DataBits = comboBox2.SelectedIndex + 6;
+                serialPort1.Parity = (Parity)comboBox3.SelectedIndex;
+                serialPort1.StopBits = (StopBits)(comboBox4.SelectedIndex + 1);
+                serialPort1.PortName = comboBox1.Text;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                serialPort_init();
+                getSerialAttr();
+                err = true;
+                MessageBox.Show("参数值不合法，请检查串口参数。参数值已重置为初始值。");
+            }
+            if (!err)
+            {
+                MessageBox.Show("串口设置应用成功");
+            }
+
+            linkCom();
+        }
+
+        private void linkCom()
+        {
+            try
+            {
+                serialPort1.Open();
+                MessageBox.Show("串口连接成功");
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.ToString());
+                this.Close();
+            }
+        }
+
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        {
+            int n = serialPort1.BytesToRead;
+            byte[] buf = new byte[n];
+            serialPort1.Read(buf, 0, n);
+            string recv = "";
+            recv += Encoding.ASCII.GetString(buf);
+            MessageBox.Show(recv);
+            if(recv == "0")
+            {
+                ComVars.num_enter++;
+            }
+            if(recv == "1")
+            {
+                ComVars.num_exit++;
+            }
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            //if(ComVars.num_enter >= ComVars.alert_valve)
+            //{
+            //    pictureBox1.BackColor = Color.MistyRose;
+            //    groupBox1.BackColor = Color.MistyRose;
+            //}
+
+            if (ComVars.used_time == ComVars.collect_time)
+            {
+                toolStripStatusLabel3.Visible = true;
+                timer2.Stop();
+            }
+            ComVars.used_time++;
+            toolStripStatusLabel2.Text = ComVars.used_time.ToString() + "s";
+
+            ComVars.flow_exit = (int)((float)ComVars.num_exit / (float)ComVars.used_time * 60);
+            ComVars.flow_enter = (int)((float)ComVars.num_enter / (float)ComVars.used_time * 60);
+
+            labelA.Text = ComVars.flow_enter.ToString();
+            labelD.Text = ComVars.flow_exit.ToString();
+
+        }
+
+        private void debugToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ComVars.used_time = 0;
+            collectData_init();
+
+            timer2.Interval = 1000;
+            toolStripStatusLabel2.Text = ComVars.used_time.ToString() + "s";
+            toolStripStatusLabel3.Visible = false;
+            timer2.Start();
+        }
+
+
     }
 }
