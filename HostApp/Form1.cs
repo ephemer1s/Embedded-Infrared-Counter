@@ -123,6 +123,17 @@ namespace HostApp
             ComVars.used_time = 0;
             collectData_init();
             MessageBox.Show("采集设置应用成功");
+            /* serialPort write & send variables */
+            if (!serialPort1.IsOpen)
+            {
+                MessageBox.Show("串口未建立连接，请先建立连接");
+            }
+            else
+            {
+                byte[] buf = new byte[] { (byte)ComVars.collect_time, (byte)ComVars.alert_valve };
+                serialPort1.Write(buf, 0, buf.Length);
+                MessageBox.Show(buf[0].ToString() + " " + buf[1].ToString());
+            }
         }
 
         private void button_serial_reset_Click(object sender, EventArgs e)
@@ -212,33 +223,18 @@ namespace HostApp
             //    groupBox1.BackColor = Color.MistyRose;
             //}
 
-            if (ComVars.used_time == ComVars.collect_time)
-            {
-                toolStripStatusLabel3.Visible = true;
-                timer2.Stop();
-            }
-            ComVars.used_time++;
-            toolStripStatusLabel2.Text = ComVars.used_time.ToString() + "s";
+            //if (ComVars.used_time == ComVars.collect_time)
+            //{
+            //    timer2.Stop();
+            //}
+            //ComVars.used_time++;
 
-            ComVars.flow_exit = (int)((float)ComVars.num_exit / (float)ComVars.used_time * 60);
-            ComVars.flow_enter = (int)((float)ComVars.num_enter / (float)ComVars.used_time * 60);
+            //ComVars.flow_exit = (int)((float)ComVars.num_exit / (float)ComVars.used_time * 60);
+            //ComVars.flow_enter = (int)((float)ComVars.num_enter / (float)ComVars.used_time * 60);
 
-            labelA.Text = ComVars.flow_enter.ToString();
-            labelD.Text = ComVars.flow_exit.ToString();
+            //labelA.Text = ComVars.flow_enter.ToString();
+            //labelD.Text = ComVars.flow_exit.ToString();
 
         }
-
-        private void debugToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ComVars.used_time = 0;
-            collectData_init();
-
-            timer2.Interval = 1000;
-            toolStripStatusLabel2.Text = ComVars.used_time.ToString() + "s";
-            toolStripStatusLabel3.Visible = false;
-            timer2.Start();
-        }
-
-
     }
 }
