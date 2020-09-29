@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "reg52.h"
 #include "ir.h"
 
 int IsNegedge(bit cur, bit prev) {
