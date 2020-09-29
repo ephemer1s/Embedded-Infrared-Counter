@@ -1,5 +1,5 @@
 #include "x5045.h"
-#include "ir.h"
+// #include "ir.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -10,7 +10,7 @@ void delay1ms()
   unsigned char i,j; 
   for(i=0;i<10;i++)
   for(j=0;j<33;j++);   
- }
+}
 void delaynms(unsigned char n){
   unsigned char i;
   for(i=0;i<n;i++)
@@ -77,7 +77,7 @@ void WriteSet(unsigned char dat,unsigned char addr)
 /*读数据操作*/
 unsigned char ReadSet(unsigned char addr)
 {
- unsigned char dat;
+  unsigned char dat;
   SCK=0;
   CS=0;
   WriteCurrent(READ);
@@ -86,7 +86,7 @@ unsigned char ReadSet(unsigned char addr)
   CS=1;
   SCK=0;
   return dat;
- }
+}
 
 /*看门狗复位*/
 void WatchDog(void)
@@ -94,20 +94,6 @@ void WatchDog(void)
   CS=1;
   CS=0;
   CS=1;
-}
-
-/*定时器初始化*/
-void TimeInit(void)
-{
-	TMOD = 0x21;    //定时器0为方式1，定时器1为方式2
-	TH0  = TimeTH0;	// set interval 10ms
-	TL0  = TimeTL0;
-	TR0  = 1;			// launch timer
-  TH1 = 0xFD; //波特率为9600
-  TL1 = 0xFD;
-  SCON = 0x50; //10位UART，允许接收
-  PCON &= 0xEF;
-  TR1 = 1; //启动定时器
 }
 
 /*向串口发送字符*/
@@ -118,28 +104,18 @@ void send_char_com(unsigned char ch)
   TI = 0;
 }
 
-/*中断初始化*/
-void UartInit()
-{
-	EA = 1;  //总中断
-	ES = 1;  //串行中断
-}
 
+// probably not workable
 /*计算机发送字符给单片机，再通过单片机发送给x5045*/
 void receive_char_com() interrupt 4
 {
   int i;
-	char num, a;
-	
-  if(RI == 1)     //收到数据
-  {
+  char num;
+  if(RI == 1){     //收到数据  
     num = SBUF;
     RI = 0;       //清除标志位
   }
-  if(TI == 1)  //发送完毕
-  {TI = 0;}
-	WriteSet(num,0x13);
-	a = ReadSet(0x13);
-	send_char_com(a);
-
+  if(TI == 1)TI = 0;  //发送完毕
+  WriteSet(num, 0x10);
+  send_char_com(ReadSet(0x10));
 }

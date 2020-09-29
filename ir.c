@@ -14,7 +14,4 @@ int IsPosedge(bit cur, bit prev) {
 	return res;
 }
 
-int FlowOverclockAlert(int flow) {
-	return 0;
-}
 
