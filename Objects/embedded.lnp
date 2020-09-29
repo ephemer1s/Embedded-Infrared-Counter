@@ -1,0 +1,6 @@
+".\Objects\STARTUP.obj",
+".\Objects\ir.obj",
+".\Objects\lcd.obj",
+".\Objects\main.obj" 
+TO ".\Objects\embedded" 
+PRINT(".\Listings\embedded.m51") RAMSIZE(256) 
