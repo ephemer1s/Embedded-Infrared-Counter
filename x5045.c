@@ -7,21 +7,21 @@
 /* 延时函数 */
 void delay1ms()
 {
-    unsigned char i,j; 
+    uchar i,j; 
     for(i=0;i<10;i++)
     for(j=0;j<33;j++);   
 }
-void delaynms(unsigned char n)
+void delaynms(uchar n)
 {
-    unsigned char i;
+    uchar i;
     for(i=0;i<n;i++)
         delay1ms();
 }
 
 /* 写入EEPROM */
-void WriteCurrent(unsigned char dat)
+void WriteCurrent(uchar dat)
 {
-    unsigned char i;
+    uchar i;
     SCK=0;                 //停止时钟
     for(i = 0; i < 8; i++)  //循环8位
     {
@@ -33,23 +33,23 @@ void WriteCurrent(unsigned char dat)
 }
 
 /* 从EEPROM读出数据 */
-unsigned char ReadCurrent(void)
+uchar ReadCurrent(void)
 {
-    unsigned char i;
-    unsigned char x=0x00;
+    uchar i;
+    uchar x=0x00;
     SCK=1;
     for(i = 0; i < 8; i++)
     {
         SCK=1;               //下降沿读出
         SCK=0;
         x<<=1;  //左移一位，因为先读出的是最高位
-        x|=(unsigned char)SO;  //按位或运算后幅值给x
+        x|=(uchar)SO;  //按位或运算后幅值给x
     }
     return(x);
 }
 
 /* 写状态寄存器 */
-void WriteSR(unsigned char rs)
+void WriteSR(uchar rs)
 {
     CS=0;
     WriteCurrent(WREN);  //允许写入
@@ -61,7 +61,7 @@ void WriteSR(unsigned char rs)
 }
 
 /* 写数据操作 */
-void WriteSet(unsigned char dat,unsigned char addr)
+void WriteSet(uchar dat,uchar addr)
 {
     SCK=0;
     CS=0;
@@ -76,9 +76,9 @@ void WriteSet(unsigned char dat,unsigned char addr)
 }
 
 /* 读数据操作 */
-unsigned char ReadSet(unsigned char addr)
+uchar ReadSet(uchar addr)
 {
-    unsigned char dat;
+    uchar dat;
     SCK=0;
     CS=0;
     WriteCurrent(READ);
@@ -98,7 +98,7 @@ void WatchDog(void)
 }
 
 /* 向串口发送字符 */
-void send_char_com(unsigned char ch)
+void send_char_com(uchar ch)
 {
     SBUF = ch;
     while(!TI);
