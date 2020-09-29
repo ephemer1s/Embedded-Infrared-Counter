@@ -12,4 +12,6 @@ void LcdWriteCom(uchar com);
 void LcdWriteData(uchar dat);
 void LCD_display(char* Lcddisplay);
 void Delay(uchar LCD_delay);
+void Press(char *time,char *curtime,char *num);
+void Int0Init();
 

@@ -1,4 +1,5 @@
 #include "lcd.h"
+#include "ir.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -72,3 +73,39 @@ void LCD_display(char* Lcddisplay)
 	}
 }
 
+void Press(char *time,char *curtime,char *num)
+{
+	char *display;
+	char *blank=" ";
+	strcpy(display, time);
+	strcpy(display, blank);
+	strcpy(display, curtime);
+	strcpy(display, blank);
+	strcpy(display, num);
+	LCD_display(display);
+}
+
+/*中断初始化*/
+void Int0Init()
+{
+	EA = 1;  //总中断
+  EX0 = 1;
+  IT0 = 1;  //下降沿触发中断
+}
+
+void Key1() interrupt 0
+{
+	 if(key1 == 0)
+	 {
+	 	LcdWriteCom(0x01);
+	 }
+}
+
+void Key2() interrupt 0
+{
+	 if(key2 == 0)
+	 {
+	 	//display1=&cnt0;
+		//LCD_display(display1);
+	 }
+}
