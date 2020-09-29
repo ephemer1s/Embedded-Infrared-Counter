@@ -393,6 +393,16 @@
               <FileType>5</FileType>
               <FilePath>.\lcd.h</FilePath>
             </File>
+            <File>
+              <FileName>x5045.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\x5045.h</FilePath>
+            </File>
+            <File>
+              <FileName>x5045.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\x5045.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

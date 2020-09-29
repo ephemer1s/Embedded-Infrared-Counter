@@ -1,10 +1,10 @@
-C51 COMPILER V9.54   IR                                                                    09/28/2020 21:25:54 PAGE 1   
+C51 COMPILER V9.56.0.0   IR                                                                09/29/2020 20:05:01 PAGE 1   
 
 
-C51 COMPILER V9.54, COMPILATION OF MODULE IR
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE IR
 OBJECT MODULE PLACED IN .\Objects\ir.obj
-COMPILER INVOKED BY: D:\Program Files\Keil\Keil C51 v9.54\C51\BIN\C51.EXE ir.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTE
-                    -ND PRINT(.\Listings\ir.lst) TABS(2) OBJECT(.\Objects\ir.obj)
+COMPILER INVOKED BY: D:\keil\C51\BIN\C51.EXE ir.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\ir.lst) T
+                    -ABS(2) OBJECT(.\Objects\ir.obj)
 
 line level    source
 
@@ -12,34 +12,27 @@ line level    source
    2          #include "reg52.h"
    3          #include "ir.h"
    4          
-   5          void TimeInit() {
-   6   1        TMOD = 0x01;    // set mode T1
-   7   1        TH0  = TimeTH0; // set interval 10ms
-   8   1        TL0  = TimeTL0;
-   9   1        TR0  = 1;     // launch timer
-  10   1      }
-  11          
-  12          int IsNegedge(bit cur, bit prev) {
-  13   1        int res = 0;
-  14   1        if(prev && !cur) res = 1;
-  15   1        return res;
-  16   1      }
-  17          
-  18          int IsPosedge(bit cur, bit prev) {
-  19   1        int res = 0;
-  20   1        if(!prev && cur) res = 1;
-  21   1        return res;
-  22   1      }
-  23          
-  24          int FlowOverclockAlert(int flow) {
-  25   1        return 0;
-  26   1      }
-*** WARNING C280 IN LINE 24 OF ir.c: 'flow': unreferenced local variable
-  27          
+   5          int IsNegedge(bit cur, bit prev) {
+   6   1        int res = 0;
+   7   1        if(prev && !cur) res = 1;
+   8   1        return res;
+   9   1      }
+  10          
+  11          int IsPosedge(bit cur, bit prev) {
+  12   1        int res = 0;
+  13   1        if(!prev && cur) res = 1;
+  14   1        return res;
+  15   1      }
+  16          
+  17          int FlowOverclockAlert(int flow) {
+  18   1        return 0;
+  19   1      }
+*** WARNING C280 IN LINE 17 OF ir.c: 'flow': unreferenced local variable
+  20          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     42    ----
+   CODE SIZE        =     30    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
