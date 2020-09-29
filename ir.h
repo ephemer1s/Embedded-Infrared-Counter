@@ -12,8 +12,11 @@ sbit led5 = P2^5;
 sbit led6 = P2^6;
 sbit led7 = P2^7;
 
-sbit ir0 = P1^0;
-sbit ir1 = P1^1;
+sbit ir0 = P1^6;
+sbit ir1 = P1^7;
+
+sbit key1 = P3^2;
+sbit key2 = P3^3;
 
 void TimeInit();
 int IsNegedge(bit cur, bit prev);
