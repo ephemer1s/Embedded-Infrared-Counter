@@ -1,5 +1,5 @@
 #include "x5045.h"
-#include "ir.h"
+// #include "ir.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -108,19 +108,25 @@ void send_char_com(unsigned char ch)
 /*计算机发送字符给单片机，再通过单片机发送给x5045*/
 void receive_char_com() interrupt 4
 {
-  int i;
-	char num, a;
-	
-  if(RI == 1)     //收到数据
-  {
-    num = SBUF;
-    RI = 0;       //清除标志位
-  }
-  if(TI == 1)  //发送完毕
-  {TI = 0;}
-	WriteSet(num,0x10);
-	delaynms(10);
-	a = ReadSet(0x10);
-	send_char_com(a);
-
+    int i;
+	unsigned char num[2]={0}, a;
+	for(i = 0; i < 2; i++)
+	{
+		if(RI == 1)     //收到数据
+        {
+            num[i] = SBUF;
+            RI = 0;       //清除标志位
+        }
+        if(TI == 1)  //发送完毕
+            {TI = 0;}
+	    WriteSet(num[i],i+10);
+	    delaynms(10);
+	    a = ReadSet(i+10);
+	    send_char_com(a);
+	}
+    if(TI == 1)  //发送完毕
+    {
+        TI = 0;
+    }
 }
+

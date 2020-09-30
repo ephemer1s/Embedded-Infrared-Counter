@@ -12,8 +12,5 @@ sbit led7 = P2^7;
 sbit ir0 = P1^6;
 sbit ir1 = P1^7;
 
-sbit key1 = P3^2;
-sbit key2 = P3^3;
-
 int IsNegedge(bit cur, bit prev);
 int IsPosedge(bit cur, bit prev);

@@ -10,7 +10,7 @@ namespace HostApp
     class ComVars
     {
         public static int collect_time;
-        public static int used_time;
+        //public static int used_time;
         public static int alert_valve;
         public static int num_enter;
         public static int num_exit;

@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  09/30/2020 09:58:27 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  09/30/2020 11:08:06 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -19,7 +19,7 @@ line level    source
    9          void main(){
   10   1      
   11   1        char *blank = " ", *time = "10s", *curtime1 = "5s", *num = "10";
-  12   1        char a,b;
+  12   1        // char a,b;
   13   1        char *p;
   14   1        char curtime = 0;
   15   1        /* variable implemetation */
@@ -62,7 +62,7 @@ line level    source
   52   4            }
   53   3          }
   54   2          else if(!led0 && led1){  // receive 2nd
-C51 COMPILER V9.54   MAIN                                                                  09/30/2020 09:58:27 PAGE 2   
+C51 COMPILER V9.54   MAIN                                                                  09/30/2020 11:08:06 PAGE 2   
 
   55   3            if(IsPosedge(ir1,tmp1)){
   56   4              led0 = 1;
@@ -107,7 +107,7 @@ line level    source
   95   4            cnt0=0;
   96   4            curtime=0;
   97   4            }
-  98   3          }
+  98   3              }
   99   2          
  100   2          
  101   2          /*°´¼üÖÐ¶Ï*/
@@ -115,8 +115,6 @@ line level    source
  103   2          
  104   2        }
  105   1      }
-*** WARNING C280 IN LINE 12 OF main.c: 'a': unreferenced local variable
-*** WARNING C280 IN LINE 12 OF main.c: 'b': unreferenced local variable
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
@@ -124,12 +122,12 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    CONSTANT SIZE    =     12    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----      26
+   DATA SIZE        =   ----      24
    IDATA SIZE       =   ----    ----
-C51 COMPILER V9.54   MAIN                                                                  09/30/2020 09:58:27 PAGE 3   
-
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
 
+C51 COMPILER V9.54   MAIN                                                                  09/30/2020 11:08:06 PAGE 3   
 
-C51 COMPILATION COMPLETE.  2 WARNING(S),  0 ERROR(S)
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

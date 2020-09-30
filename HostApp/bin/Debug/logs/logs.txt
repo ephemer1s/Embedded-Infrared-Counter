@@ -148,3 +148,7 @@ Total Enter: 2 at 2020/9/29 17:50:43
 Total Enter: 3 at 2020/9/29 17:50:57
 Total Enter: 4 at 2020/9/29 17:51:08
 Total Enter: 5 at 2020/9/29 17:53:13
+Total Enter: 1 at 2020/9/30 10:01:53
+Total Enter: 2 at 2020/9/30 10:01:57
+Total Exit: 2 at 2020/9/30 10:02:02
+Total Exit: 2 at 2020/9/30 10:02:04

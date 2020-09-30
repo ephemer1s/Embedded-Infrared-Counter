@@ -1,8 +1,17 @@
 #include "lcd.h"
-#include "ir.h"
+//#include "ir.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+
+/*液晶屏初始化*/
+void LcdInit(void) {
+      LcdWriteCom(0x38);  // (16,2) display, (5,7) matrix, 8-bit databus
+      LcdWriteCom(0x0c);  // display on | cursor blink & display off
+      LcdWriteCom(0x06);  // upon write: addrp++ | cursor++ | scroll off
+      LcdWriteCom(0x01);  // clear screen
+      LcdWriteCom(0x80);  // define data pointer head
+}
 
 void Delay(uchar LCD_delay) { 
 	uchar lcd_del;
@@ -63,32 +72,34 @@ void LCD_display(char* Lcddisplay)
 	}
 }
 
-void Press(char *time,char *curtime,char *num)
-{
-	char *display;
-	char *blank=" ";
-	strcpy(display, time);
-	strcpy(display, blank);
-	strcpy(display, curtime);
-	strcpy(display, blank);
-	strcpy(display, num);
-	LCD_display(display);
-}
+// void Press(char *time,char *curtime,char *num)
+// {
+// 	char *display;
+// 	char *blank=" ";
+// 	strcpy(display, time);
+// 	strcpy(display, blank);
+// 	strcpy(display, curtime);
+// 	strcpy(display, blank);
+// 	strcpy(display, num);
+// 	LCD_display(display);
+// }
 
-/*按键中断函数*/
-void Key1() interrupt 0
+/* Key interrupt type 0 */
+void key_int() interrupt 0
 {
-	 if(key1 == 0)
-	 {
-	 	LcdWriteCom(0x01);
-	 }
-}
-
-void Key2() interrupt 0
-{
-	 if(key2 == 0)
-	 {
-	 	//display1=&cnt0;
-		//LCD_display(display1);
-	 }
+	//key_phase = 0;
+	if(key1 == 0)
+	{
+        LcdWriteCom(0x01);  // clear screen
+        //return 0;
+	}
+	if(key2 == 0)
+	{
+        /* save operation */
+        //key_phase++;
+        //if(key_phase == 4){
+        //    key_phase = 0;
+        //}
+        //return 1;
+	}
 }

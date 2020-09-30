@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   X5045                                                                 09/30/2020 09:58:27 PAGE 1   
+C51 COMPILER V9.54   X5045                                                                 09/30/2020 11:08:06 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE X5045
@@ -9,7 +9,7 @@ COMPILER INVOKED BY: D:\Program Files\Keil\Keil C51 v9.54\C51\BIN\C51.EXE x5045.
 line level    source
 
    1          #include "x5045.h"
-   2          #include "ir.h"
+   2          // #include "ir.h"
    3          #include <stdio.h>
    4          #include <string.h>
    5          #include <stdlib.h>
@@ -62,7 +62,7 @@ line level    source
   52          {
   53   1        CS=0;
   54   1        WriteCurrent(WREN);  //允许写入
-C51 COMPILER V9.54   X5045                                                                 09/30/2020 09:58:27 PAGE 2   
+C51 COMPILER V9.54   X5045                                                                 09/30/2020 11:08:06 PAGE 2   
 
   55   1        CS=1;
   56   1        CS=0; //重新拉低使能端
@@ -120,30 +120,35 @@ line level    source
  108          /*计算机发送字符给单片机，再通过单片机发送给x5045*/
  109          void receive_char_com() interrupt 4
  110          {
- 111   1        int i;
- 112   1        char num, a;
- 113   1        
- 114   1        if(RI == 1)     //收到数据
- 115   1        {
- 116   2          num = SBUF;
-C51 COMPILER V9.54   X5045                                                                 09/30/2020 09:58:27 PAGE 3   
+ 111   1          int i;
+ 112   1        unsigned char num[2]={0}, a;
+ 113   1        for(i = 0; i < 2; i++)
+ 114   1        {
+ 115   2          if(RI == 1)     //收到数据
+ 116   2              {
+C51 COMPILER V9.54   X5045                                                                 09/30/2020 11:08:06 PAGE 3   
 
- 117   2          RI = 0;       //清除标志位
- 118   2        }
- 119   1        if(TI == 1)  //发送完毕
- 120   1        {TI = 0;}
- 121   1        WriteSet(num,0x10);
- 122   1        delaynms(10);
- 123   1        a = ReadSet(0x10);
- 124   1        send_char_com(a);
- 125   1      
- 126   1      }
-*** WARNING C280 IN LINE 111 OF x5045.c: 'i': unreferenced local variable
+ 117   3                  num[i] = SBUF;
+ 118   3                  RI = 0;       //清除标志位
+ 119   3              }
+ 120   2              if(TI == 1)  //发送完毕
+ 121   2                  {TI = 0;}
+ 122   2            WriteSet(num[i],i+10);
+ 123   2            delaynms(10);
+ 124   2            a = ReadSet(i+10);
+ 125   2            send_char_com(a);
+ 126   2        }
+ 127   1          if(TI == 1)  //发送完毕
+ 128   1          {
+ 129   2              TI = 0;
+ 130   2          }
+ 131   1      }
+ 132          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    228    ----
-   CONSTANT SIZE    =   ----    ----
+   CODE SIZE        =    302    ----
+   CONSTANT SIZE    =      2    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----       2
@@ -152,4 +157,4 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

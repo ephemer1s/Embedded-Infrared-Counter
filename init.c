@@ -1,5 +1,5 @@
 #include "init.h"
-#include "lcd.h"
+// #include "lcd.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -24,15 +24,6 @@ void Int0Init(void)
     EA = 1;  //总中断
     EX0 = 1;
     IT0 = 1;  //下降沿触发中断
-}
-
-/*液晶屏初始化*/
-void LcdInit(void) {
-      LcdWriteCom(0x38);  // (16,2) display, (5,7) matrix, 8-bit databus
-      LcdWriteCom(0x0c);  // display on | cursor blink & display off
-      LcdWriteCom(0x06);  // upon write: addrp++ | cursor++ | scroll off
-      LcdWriteCom(0x01);  // clear screen
-      LcdWriteCom(0x80);  // define data pointer head
 }
 
 /*串行中断初始化*/

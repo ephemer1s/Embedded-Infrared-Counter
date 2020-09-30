@@ -6,6 +6,8 @@ sbit SI = P3^5; //串行数据输入端
 sbit SCK = P3^7; //串行时钟输入端
 sbit SWR = P3^6; //写入保护端
 
+
+
 #define WREN 0x06 //写入使能指令
 #define WRDI 0x04 //写入禁止指令
 #define WRSR 0x01 //写入状态寄存器指令

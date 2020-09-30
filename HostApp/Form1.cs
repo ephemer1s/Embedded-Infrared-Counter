@@ -120,7 +120,7 @@ namespace HostApp
             //button_collect_apply.Enabled = false;
             ComVars.collect_time = int.Parse(textBox1.Text);
             ComVars.alert_valve = int.Parse(textBox2.Text);
-            ComVars.used_time = 0;
+            //ComVars.used_time = 0;
             collectData_init();
             MessageBox.Show("采集设置应用成功");
             /* serialPort write & send variables */
@@ -153,6 +153,12 @@ namespace HostApp
             {
                 serialPort1.Close();
             }
+            setCom();
+            linkCom();
+        }
+
+        private void setCom()
+        {
             /* Apply Changes */
             bool err = false;
             try
@@ -174,8 +180,6 @@ namespace HostApp
             {
                 MessageBox.Show("串口设置应用成功");
             }
-
-            linkCom();
         }
 
         private void linkCom()
@@ -204,7 +208,6 @@ namespace HostApp
             serialPort1.Read(buf, 0, n);
             string recv = "";
             recv += Encoding.ASCII.GetString(buf);
-            MessageBox.Show(recv);
             if(recv == "0")
             {
                 ComVars.num_enter++;

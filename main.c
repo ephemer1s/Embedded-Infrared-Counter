@@ -9,7 +9,7 @@
 void main(){
 
 	char *blank = " ", *time = "10s", *curtime1 = "5s", *num = "10";
-	char a,b;
+	// char a,b;
 	char *p;
 	char curtime = 0;
 	/* variable implemetation */
