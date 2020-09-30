@@ -1,10 +1,10 @@
-C51 COMPILER V9.56.0.0   X5045                                                             09/29/2020 20:14:09 PAGE 1   
+C51 COMPILER V9.54   X5045                                                                 09/30/2020 09:58:27 PAGE 1   
 
 
-C51 COMPILER V9.56.0.0, COMPILATION OF MODULE X5045
+C51 COMPILER V9.54, COMPILATION OF MODULE X5045
 OBJECT MODULE PLACED IN .\Objects\x5045.obj
-COMPILER INVOKED BY: D:\keil\C51\BIN\C51.EXE x5045.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\x5045.
-                    -lst) TABS(2) OBJECT(.\Objects\x5045.obj)
+COMPILER INVOKED BY: D:\Program Files\Keil\Keil C51 v9.54\C51\BIN\C51.EXE x5045.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTE
+                    -XTEND PRINT(.\Listings\x5045.lst) TABS(2) OBJECT(.\Objects\x5045.obj)
 
 line level    source
 
@@ -62,7 +62,7 @@ line level    source
   52          {
   53   1        CS=0;
   54   1        WriteCurrent(WREN);  //允许写入
-C51 COMPILER V9.56.0.0   X5045                                                             09/29/2020 20:14:09 PAGE 2   
+C51 COMPILER V9.54   X5045                                                                 09/30/2020 09:58:27 PAGE 2   
 
   55   1        CS=1;
   56   1        CS=0; //重新拉低使能端
@@ -108,60 +108,41 @@ line level    source
   96   1        CS=1;
   97   1      }
   98          
-  99          /*定时器初始化*/
- 100          void TimeInit(void)
+  99          /*向串口发送字符*/
+ 100          void send_char_com(unsigned char ch)
  101          {
- 102   1        TMOD = 0x21;    //定时器0为方式1，定时器1为方式2
- 103   1        TH0  = TimeTH0; // set interval 10ms
- 104   1        TL0  = TimeTL0;
- 105   1        TR0  = 1;     // launch timer
- 106   1        TH1 = 0xFD; //波特率为9600
- 107   1        TL1 = 0xFD;
- 108   1        SCON = 0x50; //10位UART，允许接收
- 109   1        PCON &= 0xEF;
- 110   1        TR1 = 1; //启动定时器
- 111   1      }
- 112          
- 113          /*向串口发送字符*/
- 114          void send_char_com(unsigned char ch)
- 115          {
- 116   1        SBUF = ch;
-C51 COMPILER V9.56.0.0   X5045                                                             09/29/2020 20:14:09 PAGE 3   
+ 102   1        SBUF = ch;
+ 103   1        while(!TI);
+ 104   1        TI = 0;
+ 105   1      }
+ 106          
+ 107          
+ 108          /*计算机发送字符给单片机，再通过单片机发送给x5045*/
+ 109          void receive_char_com() interrupt 4
+ 110          {
+ 111   1        int i;
+ 112   1        char num, a;
+ 113   1        
+ 114   1        if(RI == 1)     //收到数据
+ 115   1        {
+ 116   2          num = SBUF;
+C51 COMPILER V9.54   X5045                                                                 09/30/2020 09:58:27 PAGE 3   
 
- 117   1        while(!TI);
- 118   1        TI = 0;
- 119   1      }
- 120          
- 121          /*中断初始化*/
- 122          void UartInit()
- 123          {
- 124   1        EA = 1;  //总中断
- 125   1        ES = 1;  //串行中断
+ 117   2          RI = 0;       //清除标志位
+ 118   2        }
+ 119   1        if(TI == 1)  //发送完毕
+ 120   1        {TI = 0;}
+ 121   1        WriteSet(num,0x10);
+ 122   1        delaynms(10);
+ 123   1        a = ReadSet(0x10);
+ 124   1        send_char_com(a);
+ 125   1      
  126   1      }
- 127          
- 128          /*计算机发送字符给单片机，再通过单片机发送给x5045*/
- 129          void receive_char_com() interrupt 4
- 130          {
- 131   1        int i;
- 132   1        char num, a;
- 133   1        
- 134   1        if(RI == 1)     //收到数据
- 135   1        {
- 136   2          num = SBUF;
- 137   2          RI = 0;       //清除标志位
- 138   2        }
- 139   1        if(TI == 1)  //发送完毕
- 140   1        {TI = 0;}
- 141   1        WriteSet(num,0x13);
- 142   1        a = ReadSet(0x13);
- 143   1        send_char_com(a);
- 144   1      
- 145   1      }
-*** WARNING C280 IN LINE 131 OF x5045.c: 'i': unreferenced local variable
+*** WARNING C280 IN LINE 111 OF x5045.c: 'i': unreferenced local variable
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    254    ----
+   CODE SIZE        =    228    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

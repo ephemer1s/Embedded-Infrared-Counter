@@ -1,12 +1,8 @@
 #include "lcd.h"
-// #include "ir.h"
+#include "ir.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
-
-
-
 
 void Delay(uchar LCD_delay) { 
 	uchar lcd_del;
@@ -67,16 +63,32 @@ void LCD_display(char* Lcddisplay)
 	}
 }
 
-// incompatible, use string.strcat(desc,src) next time.
+void Press(char *time,char *curtime,char *num)
+{
+	char *display;
+	char *blank=" ";
+	strcpy(display, time);
+	strcpy(display, blank);
+	strcpy(display, curtime);
+	strcpy(display, blank);
+	strcpy(display, num);
+	LCD_display(display);
+}
 
-// void Press(char *time,char *curtime,char *num)
-// {
-// 	char *display;
-// 	char *blank=" ";
-// 	strcpy(display, time);
-// 	strcpy(display, blank);
-// 	strcpy(display, curtime);
-// 	strcpy(display, blank);
-// 	strcpy(display, num);
-// 	LCD_display(display);
-// }
+/*°´¼üÖÐ¶Ïº¯Êý*/
+void Key1() interrupt 0
+{
+	 if(key1 == 0)
+	 {
+	 	LcdWriteCom(0x01);
+	 }
+}
+
+void Key2() interrupt 0
+{
+	 if(key2 == 0)
+	 {
+	 	//display1=&cnt0;
+		//LCD_display(display1);
+	 }
+}

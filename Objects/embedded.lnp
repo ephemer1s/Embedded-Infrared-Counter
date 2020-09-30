@@ -2,6 +2,7 @@
 ".\Objects\ir.obj",
 ".\Objects\lcd.obj",
 ".\Objects\main.obj",
-".\Objects\x5045.obj" 
+".\Objects\x5045.obj",
+".\Objects\init.obj" 
 TO ".\Objects\embedded" 
 PRINT(".\Listings\embedded.m51") RAMSIZE(256) 
