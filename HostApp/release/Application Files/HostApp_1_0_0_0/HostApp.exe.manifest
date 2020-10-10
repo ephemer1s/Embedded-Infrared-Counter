@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="HostApp.exe" version="1.0.0.0" publicKeyToken="98fbae50ef462782" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="HostApp" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="HostApp.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC 清单选项
+          如果要更改 Windows 用户帐户控制级别，请用以下节点之一替换
+          requestedExecutionLevel 节点。
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+          如果要利用文件和注册表虚拟化提供
+          向后兼容性，请删除 requestedExecutionLevel 节点。
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="HostApp.exe" size="36840">
+      <assemblyIdentity name="HostApp" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>k5MGxH8UI9pHV7XbRJ0HqoZ4G/VJC58o8ND18uL/E0Y=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="HostApp.exe.config" size="189">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>R+Wg8QGvQVHX8T0ta/qbhH1bXkqY0fRnS3wBV3J0bN8=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=LAPTOP-114514\ephemera" issuerKeyHash="355fa9f87576d83b67e32db86fe2e2f3dbb9fc7f" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>SSGHkp+B9KqkXnBdxTV0Uk8vq1AuXu4tslGc9KT76U0=</DigestValue></Reference></SignedInfo><SignatureValue>m++rad8SFP9r+liXGCUY0RDNeNA/uykrT6ZZUGVP1APD0XdgjEt5hGC5lYoq6W5hSJZMY4A3f2cm0kjRrcoUla+Jf3/rkDCbsxb3Ve8ODUpoM4Ij8Hvzs39IgW4VLtUAbW7XlEy5SAUq0QN5QP0AI+fFWm5nZNBiYiwStIrB0tI=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>o4Ctr2lB6BXmvPghv1V3pedIofMsNhuf/RZw9gOhUsufoQLpntJ8vpChnR+RlMPoVI5cLqJ6d4/OVBguPxdgl450pij9FAyPr460Z+atRauHxuQYNQZBw+wKHiw9alqyPIXaED1mpLgHB5Y4+CBXyQPQWkVtPAc6yRa9tMeBpgE=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="4de9fba4f49c51b22dee5e2e50ab2f4f527435c55d705ea4aaf4819f92872149" Description="" Url=""><as:assemblyIdentity name="HostApp.exe" version="1.0.0.0" publicKeyToken="98fbae50ef462782" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=LAPTOP-114514\ephemera</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>VPDHVJFEi1jhr9X+IXzTQcqeY4TJMd14FEQdHHCXB/8=</DigestValue></Reference></SignedInfo><SignatureValue>a2XuaYX+qs3gwCavvx7h3WmsJqYPYYTL9/aCgfu70LVxgcH2ulreEqeLsy9LuZcTrZ0M98IHgpHzoa9mz+ElkioGz5h4G3UMpM8TSI1+H+zvSmkuMsE4D+G5OzViavQ+hOFi6i+NZPi1BKPRKjrM8JJTnZKy/R2atUgFLnSS4+Q=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>o4Ctr2lB6BXmvPghv1V3pedIofMsNhuf/RZw9gOhUsufoQLpntJ8vpChnR+RlMPoVI5cLqJ6d4/OVBguPxdgl450pij9FAyPr460Z+atRauHxuQYNQZBw+wKHiw9alqyPIXaED1mpLgHB5Y4+CBXyQPQWkVtPAc6yRa9tMeBpgE=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB8TCCAVqgAwIBAgIQZ5P0wwrE/ItLr6Li4P/ClzANBgkqhkiG9w0BAQsFADA3MTUwMwYDVQQDHiwATABBAFAAVABPAFAALQAxADEANAA1ADEANABcAGUAcABoAGUAbQBlAHIAYTAeFw0yMDA5MzAwODQ2NDZaFw0yMTA5MzAxNDQ2NDZaMDcxNTAzBgNVBAMeLABMAEEAUABUAE8AUAAtADEAMQA0ADUAMQA0AFwAZQBwAGgAZQBtAGUAcgBhMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCjgK2vaUHoFea8+CG/VXel50ih8yw2G5/9FnD2A6FSy5+hAume0ny+kKGdH5GUw+hUjlwuonp3j85UGC4/F2CXjnSmKP0UDI+vjrRn5q1Fq4fG5Bg1BkHD7AoeLD1qWrI8hdoQPWakuAcHljj4IFfJA9BaRW08BzrJFr20x4GmAQIDAQABMA0GCSqGSIb3DQEBCwUAA4GBACFziRUhYTJtIu0sZDYLq+DvVr7LnL2+csjbrM8PodJmErxwLhL0EW3MZcLmMshFgaTNR0NHFwl20xucKRYlGRlmEN6OARcD9x+kzkJfaZsnn2+pfskcMwHfSiph3xqbDOPh/wBZfVtFl3H7JIW6aQ9eSYJcpzHOSRfH9TVJ28mY</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

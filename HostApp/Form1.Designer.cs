@@ -71,6 +71,7 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.采集数据清零ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -452,19 +453,20 @@
             // 关于ToolStripMenuItem
             // 
             this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
-            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
             this.关于ToolStripMenuItem.Text = "关于";
             // 
             // 查看日志ToolStripMenuItem
             // 
             this.查看日志ToolStripMenuItem.Name = "查看日志ToolStripMenuItem";
-            this.查看日志ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.查看日志ToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
             this.查看日志ToolStripMenuItem.Text = "查看日志";
             // 
             // toolStripButton2
             // 
             this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.采集数据清零ToolStripMenuItem,
             this.查看日志ToolStripMenuItem,
             this.关于ToolStripMenuItem});
             this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
@@ -497,11 +499,19 @@
             // 
             // timer2
             // 
+            this.timer2.Interval = 1000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // timer3
             // 
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            // 
+            // 采集数据清零ToolStripMenuItem
+            // 
+            this.采集数据清零ToolStripMenuItem.Name = "采集数据清零ToolStripMenuItem";
+            this.采集数据清零ToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
+            this.采集数据清零ToolStripMenuItem.Text = "采集数据清零";
+            this.采集数据清零ToolStripMenuItem.Click += new System.EventHandler(this.采集数据清零ToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -581,6 +591,7 @@
         private System.Windows.Forms.Label labelE;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Timer timer3;
+        private System.Windows.Forms.ToolStripMenuItem 采集数据清零ToolStripMenuItem;
     }
 }
 

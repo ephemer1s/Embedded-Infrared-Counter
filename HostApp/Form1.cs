@@ -73,6 +73,8 @@ namespace HostApp
             timer1.Interval = 1000;
             timer1.Start();
             ComVars.time_stamp = DateTime.Now.ToString();
+            timer2.Stop();
+
 
             serialPort_init();
             getSerialAttr();
@@ -91,7 +93,7 @@ namespace HostApp
             
             /* write file */
             string s = "";
-            string f = "./logs/logs" + ComVars.time_stamp + ".txt";
+            string f = "./logs/logs.txt";
             if (ComVars.num_enter != int.Parse(labelQ.Text))
             {
                 s = "Total Enter: " + ComVars.num_enter.ToString() + " at " + DateTime.Now.ToString();
@@ -113,13 +115,22 @@ namespace HostApp
             /* update UI according to data */
             labelQ.Text = ComVars.num_enter.ToString();
             labelE.Text = ComVars.num_exit.ToString();
+
+            ComVars.flow_exit = ComVars.num_exit;
+            ComVars.flow_enter = ComVars.num_enter;
+
+            labelA.Text = ComVars.flow_enter.ToString();
+            labelD.Text = ComVars.flow_exit.ToString();
         }
 
         private void button_collect_apply_Click(object sender, EventArgs e)
         {
             //button_collect_apply.Enabled = false;
-            ComVars.collect_time = int.Parse(textBox1.Text);
-            ComVars.alert_valve = int.Parse(textBox2.Text);
+            int a = int.Parse(textBox1.Text);
+            int b = int.Parse(textBox3.Text);
+
+            ComVars.collect_time = (byte)a;
+            ComVars.alert_valve = (byte)b;
             //ComVars.used_time = 0;
             collectData_init();
             MessageBox.Show("采集设置应用成功");
@@ -130,9 +141,9 @@ namespace HostApp
             }
             else
             {
-                byte[] buf = new byte[] { (byte)ComVars.collect_time, (byte)ComVars.alert_valve };
+                byte[] buf = new byte[] { ComVars.collect_time, ComVars.alert_valve };
                 serialPort1.Write(buf, 0, buf.Length);
-                MessageBox.Show(buf[0].ToString() + " " + buf[1].ToString());
+                MessageBox.Show("Successful sent! Byte1(Dec):" + buf[0].ToString() + " Byte2(Dec):" + buf[1].ToString());
             }
         }
 
@@ -210,20 +221,36 @@ namespace HostApp
             recv += Encoding.ASCII.GetString(buf);
             if(recv == "0")
             {
+                if (timer2.Enabled == false)
+                {
+                    timer2.Enabled = true;
+                    timer2.Start();
+                }
                 ComVars.num_enter++;
             }
             if(recv == "1")
             {
+                if (timer2.Enabled == false)
+                {
+                    timer2.Enabled = true;
+                    timer2.Start();
+                }
                 ComVars.num_exit++;
             }
         }
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            //if(ComVars.num_enter >= ComVars.alert_valve)
+            //if (ComVars.num_enter >= ComVars.alert_valve)
             //{
             //    pictureBox1.BackColor = Color.MistyRose;
             //    groupBox1.BackColor = Color.MistyRose;
+            //}
+
+            //if (ComVars.num_exit >= ComVars.alert_valve)
+            //{
+            //    pictureBox2.BackColor = Color.MistyRose;
+            //    groupBox2.BackColor = Color.MistyRose;
             //}
 
             //if (ComVars.used_time == ComVars.collect_time)
@@ -232,12 +259,26 @@ namespace HostApp
             //}
             //ComVars.used_time++;
 
-            //ComVars.flow_exit = (int)((float)ComVars.num_exit / (float)ComVars.used_time * 60);
-            //ComVars.flow_enter = (int)((float)ComVars.num_enter / (float)ComVars.used_time * 60);
+            //ComVars.flow_exit = ComVars.num_exit;
+            //ComVars.flow_enter = ComVars.num_enter;
 
             //labelA.Text = ComVars.flow_enter.ToString();
             //labelD.Text = ComVars.flow_exit.ToString();
 
+            //toolStriptimer2.Text = ComVars.used_time.ToString() + "s";
+        }
+
+        private void toolStripStatusLabel2_Click(object sender, EventArgs e)
+        {
+            //toolStriptimer2.Text = "0s";
+            //ComVars.used_time = 0;
+            //timer2.Stop();
+        }
+
+        private void 采集数据清零ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            collectData_init();
+            getCollectData();
         }
     }
 }

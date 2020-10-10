@@ -13,16 +13,16 @@ void LcdInit(void) {
       LcdWriteCom(0x80);  // define data pointer head
 }
 
-void Delay(uchar LCD_delay) { 
-	uchar lcd_del;
+void Delay(unsigned char LCD_delay) { 
+	unsigned char lcd_del;
 	while(LCD_delay--) {
-		lcd_del=100;
+		lcd_del=5;
 		while(lcd_del--);
 	}
 }
 
 
-void LcdWriteCom(uchar com) {
+void LcdWriteCom(unsigned char com) {
 	/* write command */
       LCDE = 0;    // energy clc
       LCDRS = 0;   // select send command
@@ -35,7 +35,7 @@ void LcdWriteCom(uchar com) {
 }
 
 
-void LcdWriteData(uchar dat) {
+void LcdWriteData(unsigned char dat) {
 	/* write data */ 
       LCDE = 0;    // energy clc
       LCDRS = 1;   // select send data
@@ -51,7 +51,7 @@ void LcdWriteData(uchar dat) {
 void LCD_display(char* Lcddisplay)
 {
 	int i;
-	uchar* p; 
+	unsigned char* p; 
 	p = Lcddisplay;
 	
 	if(strlen(Lcddisplay)<16) { // display on 1 line
@@ -84,22 +84,5 @@ void LCD_display(char* Lcddisplay)
 // 	LCD_display(display);
 // }
 
-/* Key interrupt type 0 */
-void key_int() interrupt 0
-{
-	//key_phase = 0;
-	if(key1 == 0)
-	{
-        LcdWriteCom(0x01);  // clear screen
-        //return 0;
-	}
-	if(key2 == 0)
-	{
-        /* save operation */
-        //key_phase++;
-        //if(key_phase == 4){
-        //    key_phase = 0;
-        //}
-        //return 1;
-	}
-}
+/* switch display */
+

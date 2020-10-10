@@ -18,3 +18,7 @@ D:\Program Data\Github\repos\Embedded-Infrared-Counter\HostApp\obj\Debug\HostApp
 D:\Program Data\Github\repos\Embedded-Infrared-Counter\HostApp\obj\Debug\HostApp.csproj.CoreCompileInputs.cache
 D:\Program Data\Github\repos\Embedded-Infrared-Counter\HostApp\obj\Debug\HostApp.exe
 D:\Program Data\Github\repos\Embedded-Infrared-Counter\HostApp\obj\Debug\HostApp.pdb
+D:\Program Data\Github\repos\Embedded-Infrared-Counter\HostApp\bin\Debug\HostApp.exe.manifest
+D:\Program Data\Github\repos\Embedded-Infrared-Counter\HostApp\bin\Debug\HostApp.application
+D:\Program Data\Github\repos\Embedded-Infrared-Counter\HostApp\obj\Debug\HostApp.exe.manifest
+D:\Program Data\Github\repos\Embedded-Infrared-Counter\HostApp\obj\Debug\HostApp.application

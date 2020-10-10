@@ -27,14 +27,27 @@ assembling STARTUP.A51...
 compiling ir.c...
 compiling lcd.c...
 compiling main.c...
+main.c(183): warning C280: 'i': unreferenced local variable
 compiling x5045.c...
 compiling init.c...
 linking...
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?WATCHDOG?X5045
-Program Size: data=43.2 xdata=0 code=1316
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?LCD_REFRESH?MAIN
+    CALLER1: ?C_C51STARTUP
+    CALLER2: ?PR?KEY_INT2?MAIN
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?PRINTF?PRINTF
+    CALLER1: ?C_C51STARTUP
+    CALLER2: ?PR?KEY_INT2?MAIN
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_LCD_DISPLAY?LCD
+    CALLER1: ?C_C51STARTUP
+    CALLER2: ?PR?KEY_INT2?MAIN
+Program Size: data=21.4 xdata=147 code=3454
 creating hex file from ".\Objects\embedded"...
-".\Objects\embedded" - 0 Error(s), 1 Warning(s).
+".\Objects\embedded" - 0 Error(s), 5 Warning(s).
 </pre>
 </body>
 </html>

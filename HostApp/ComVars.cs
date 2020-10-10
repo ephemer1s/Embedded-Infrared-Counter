@@ -9,9 +9,9 @@ namespace HostApp
 {
     class ComVars
     {
-        public static int collect_time;
-        //public static int used_time;
-        public static int alert_valve;
+        public static byte collect_time;
+        public static int used_time;
+        public static byte alert_valve;
         public static int num_enter;
         public static int num_exit;
         public static int flow_enter;

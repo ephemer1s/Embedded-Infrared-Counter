@@ -99,34 +99,32 @@ void WatchDog(void)
 /*向串口发送字符*/
 void send_char_com(unsigned char ch)
 {
+    ES = 0;
   SBUF = ch;
   while(!TI);
   TI = 0;
+  ES = 1;
 }
 
 
-/*计算机发送字符给单片机，再通过单片机发送给x5045*/
 void receive_char_com() interrupt 4
 {
-    int i;
-	unsigned char num[2]={0}, a;
+  int i;
+	unsigned char num[2] = {0}, a, addr[2] = {0x10, 0x11};
 	for(i = 0; i < 2; i++)
 	{
-		if(RI == 1)     //收到数据
+		if(RI == 1)
         {
             num[i] = SBUF;
-            RI = 0;       //清除标志位
+            RI = 0;
         }
-        if(TI == 1)  //发送完毕
-            {TI = 0;}
-	    WriteSet(num[i],i+10);
+	    WriteSet(num[i],addr[i]);
 	    delaynms(10);
-	    a = ReadSet(i+10);
+	    a = ReadSet(addr[i]);
 	    send_char_com(a);
 	}
-    if(TI == 1)  //发送完毕
+    if(TI == 1)
     {
         TI = 0;
     }
 }
-
