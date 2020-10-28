@@ -4,7 +4,8 @@
 #include <string.h>
 #include <stdlib.h>
 
-/*“∫æß∆¡≥ı ºªØ*/
+/* screen init */
+// not implemented in init.c because of include collision
 void LcdInit(void) {
       LcdWriteCom(0x38);  // (16,2) display, (5,7) matrix, 8-bit databus
       LcdWriteCom(0x0c);  // display on | cursor blink & display off
@@ -13,6 +14,7 @@ void LcdInit(void) {
       LcdWriteCom(0x80);  // define data pointer head
 }
 
+// lcd refresh delay
 void Delay(unsigned char LCD_delay) { 
 	unsigned char lcd_del;
 	while(LCD_delay--) {
@@ -20,7 +22,6 @@ void Delay(unsigned char LCD_delay) {
 		while(lcd_del--);
 	}
 }
-
 
 void LcdWriteCom(unsigned char com) {
 	/* write command */
@@ -48,6 +49,7 @@ void LcdWriteData(unsigned char dat) {
 }
 
 
+// display strings (Lcddisplay must <= 32 characters)
 void LCD_display(char* Lcddisplay)
 {
 	int i;
@@ -71,18 +73,3 @@ void LCD_display(char* Lcddisplay)
 		}
 	}
 }
-
-// void Press(char *time,char *curtime,char *num)
-// {
-// 	char *display;
-// 	char *blank=" ";
-// 	strcpy(display, time);
-// 	strcpy(display, blank);
-// 	strcpy(display, curtime);
-// 	strcpy(display, blank);
-// 	strcpy(display, num);
-// 	LCD_display(display);
-// }
-
-/* switch display */
-

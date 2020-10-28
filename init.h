@@ -5,5 +5,4 @@
 
 void TimeInit(void);  //定时器初始化
 void Int0Init(void);  //中断初始化
-
 void UartInit(void);  //串行中断初始化
